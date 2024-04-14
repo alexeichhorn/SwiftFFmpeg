@@ -144,9 +144,59 @@ public final class AVIOContext {
         }
     }
     
+//    /// (custom added)
+//    /// Uses `avio_open_dyn_buf` underneath
+//    public func openDynamicBuffer() throws {
+//        try throwIfFail(avio_open_dyn_buf(&native))
+//    }
+    /// (custom added)
+    /// Uses `avio_open_dyn_buf` underneath
+    public static func openDynamicBuffer() throws -> AVIOContext {
+        
+        var nativePointer: UnsafeMutablePointer<FFmpeg.AVIOContext>? = nil
+        
+        try withUnsafeMutablePointer(to: &nativePointer) { nativeDoublePointer in
+            try throwIfFail(avio_open_dyn_buf(nativeDoublePointer))
+        }
+        
+        guard let native = nativePointer else {
+            print("avio_open_dyn_buf returned nil")
+            throw AVError.unknown
+        }
+        
+        return AVIOContext(native: native)
+    }
+    
+    /// (custom added)
+    /// Uses `avio_close_dyn_buf` underneath
+    /// - Returns: The buffer contents as a byte array
+    public func closeDynamicBuffer() throws -> [UInt8] {
+        
+        var buffer: UnsafeMutablePointer<UInt8>? = nil
+        
+        let length = avio_close_dyn_buf(native, &buffer)
+        if length <= 0 {
+            print("avio_close_dyn_buf returned \(length)")
+            throw AVError.unknown
+        }
+        
+        let byteArray = Array(UnsafeBufferPointer(start: buffer, count: Int(length)))
+        return byteArray
+    }
+    
     /// Writes the contents of a provided data buffer to the receiver.
     public func write(_ buffer: UnsafePointer<UInt8>, size: Int) {
         avio_write(native, buffer, Int32(size))
+    }
+    
+    /// (custom added)
+    /// Writes the contents of a provided data buffer to the receiver.
+    public func write(_ bytes: [UInt8]) {
+        bytes.withUnsafeBufferPointer { buffer in
+            if let baseAddress = buffer.baseAddress {
+                write(baseAddress, size: bytes.count)
+            }
+        }
     }
     
     /// Sets the file position indicator for the file stream to the value pointed to by offset.

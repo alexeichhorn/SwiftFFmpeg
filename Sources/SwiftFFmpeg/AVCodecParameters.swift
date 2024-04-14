@@ -37,8 +37,8 @@ public final class AVCodecParameters {
     
     /// Specific type of the encoded data (the codec used).
     public var codecId: AVCodecID {
-        get { native.pointee.codec_id }
-        set { native.pointee.codec_id = newValue }
+        get { AVCodecID(native: native.pointee.codec_id) }
+        set { native.pointee.codec_id = newValue.native }
     }
     
     /// Codec-specific bitstream restrictions that the stream conforms to.

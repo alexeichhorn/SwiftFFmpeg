@@ -194,6 +194,54 @@ final public class AVFormatContext {
         av_dump_format(native, 0, url ?? self.url, isOutput ? 1 : 0)
     }
     
+    /// (custom added)
+    /// uses `s->io_open` underneath
+    public func ioOpen(_ s: AVFormatContext?, filename: String, flag: AVIOContext.Flag, options: [String: String]? = nil) throws -> AVIOContext {
+        var pm: OpaquePointer? = options?.avDict
+        defer { av_dict_free(&pm) }
+        
+        //var pbPointer = pb?.native
+        var pbPointer: UnsafeMutablePointer<FFmpeg.AVIOContext>? = nil
+        
+        try withUnsafeMutablePointer(to: &pbPointer) { pbDoublePointer in
+            try throwIfFail(self.native.pointee.io_open(s?.native, pbDoublePointer, filename, flag.rawValue, &pm))
+        }
+
+        dumpUnrecognizedOptions(pm)
+        
+        guard let pbPointer else {
+            print("pbPointer is nil")
+            throw AVError.unknown
+        }
+        
+        return AVIOContext(native: pbPointer)
+    }
+    
+    /// (custom added)
+    /// uses `avformat_init_output` underneath
+    public func initOutput(options: [String: String]? = nil) throws {
+        var pm: OpaquePointer? = options?.avDict
+        defer { av_dict_free(&pm) }
+        
+        try throwIfFail(avformat_init_output(native, &pm))
+        
+        dumpUnrecognizedOptions(pm)
+    }
+    
+    
+    /// (custom added)
+    /// Uses `->io_close` and `->io_close2` underneath
+    public func ioClose(_ pb: inout AVIOContext?) throws {
+        if pb != nil {
+            if /*native.pointee.io_close == ff_format_io_close_default ||*/ native.pointee.io_close == nil {
+                try throwIfFail(native.pointee.io_close2(native, pb?.native))
+            } else {
+                native.pointee.io_close(native, pb?.native)
+            }
+        }
+        
+        pb = nil
+    }
 }
 
 

@@ -100,6 +100,12 @@ public final class AVPacket {
         set { native.pointee.pos = newValue }
     }
     
+    /// (custom added)
+    public var timeBase: AVRational {
+        get { native.pointee.time_base }
+        set { native.pointee.time_base = newValue }
+    }
+    
     /// Convert valid timing fields (timestamps / durations) in a packet from one timebase to another.
     /// Timestamps with unknown values (`AVTimestamp.noPTS`) will be ignored.
     ///

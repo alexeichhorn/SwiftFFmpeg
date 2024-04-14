@@ -10,7 +10,7 @@ import FFmpeg
 
 // MARK: - AVCodecID
 
-extension AVCodecID {
+extension FFmpeg.AVCodecID {
     public static let none = AV_CODEC_ID_NONE
     
     // MARK: - Video Codecs
@@ -107,6 +107,257 @@ extension AVCodecID {
     }
 }
 
+/// Actual wrapper (so we can import it with `SwiftFFmpeg` directly)
+public enum AVCodecID {
+    case none
+    
+    // - Video Codecs
+    
+    case MPEG1VIDEO
+    /// preferred ID for MPEG-1/2 video decoding
+    case MPEG2VIDEO
+    case H261
+    case H263
+    case MPEG4
+    case H264
+    case VP3
+    case PNG
+    case PGM
+    case BMP
+    case JPEG2000
+    case VP5
+    case VP6
+    case TIFF
+    case GIF
+    case VP8
+    case VP9
+    case WEBP
+    case HEVC
+    case VP7
+    case APNG
+    case AV1
+    case SVG
+    
+    // - various PCM "codecs"
+    
+    /// A dummy id pointing at the start of audio codecs
+    case FIRST_AUDIO
+    case PCM_S16LE
+    case PCM_S16BE
+    case PCM_U16LE
+    case PCM_U16BE
+    case PCM_S8
+    case PCM_U8
+    case PCM_MULAW
+    case PCM_ALAW
+    case PCM_S32LE
+    case PCM_S32BE
+    case PCM_U32LE
+    case PCM_U32BE
+    case PCM_S24LE
+    case PCM_S24BE
+    case PCM_U24LE
+    case PCM_U24BE
+    case PCM_S24DAUD
+    case PCM_ZORK
+    case PCM_S16LE_PLANAR
+    case PCM_DVD
+    case PCM_F32BE
+    case PCM_F32LE
+    case PCM_F64BE
+    case PCM_F64LE
+    case PCM_BLURAY
+    case PCM_LXF
+    case S302M
+    case PCM_S8_PLANAR
+    case PCM_S24LE_PLANAR
+    case PCM_S32LE_PLANAR
+    case PCM_S16BE_PLANAR
+    
+    case PCM_S64LE
+    case PCM_S64BE
+    case PCM_F16LE
+    case PCM_F24LE
+    
+    // - AMR
+    
+    case AMR_NB
+    case AMR_WB
+    
+    // - Audio Codecs
+    
+    case MP2
+    /// preferred ID for decoding MPEG audio layer 1, 2 or 3
+    case MP3
+    case AAC
+    case FLAC
+    case APE
+    case MP1
+    
+    public init(native: FFmpeg.AVCodecID) {
+        switch native {
+        case .none: self = .none
+        case .MPEG1VIDEO: self = .MPEG1VIDEO
+        case .MPEG2VIDEO: self = .MPEG2VIDEO
+        case .H261: self = .H261
+        case .H263: self = .H263
+        case .MPEG4: self = .MPEG4
+        case .H264: self = .H264
+        case .VP3: self = .VP3
+        case .PNG: self = .PNG
+        case .PGM: self = .PGM
+        case .BMP: self = .BMP
+        case .JPEG2000: self = .JPEG2000
+        case .VP5: self = .VP5
+        case .VP6: self = .VP6
+        case .TIFF: self = .TIFF
+        case .GIF: self = .GIF
+        case .VP8: self = .VP8
+        case .VP9: self = .VP9
+        case .WEBP: self = .WEBP
+        case .HEVC: self = .HEVC
+        case .VP7: self = .VP7
+        case .APNG: self = .APNG
+        case .AV1: self = .AV1
+        case .SVG: self = .SVG
+            // PCM codecs
+        case .FIRST_AUDIO: self = .FIRST_AUDIO
+        case .PCM_S16LE: self = .PCM_S16LE
+        case .PCM_S16BE: self = .PCM_S16BE
+        case .PCM_U16LE: self = .PCM_U16LE
+        case .PCM_U16BE: self = .PCM_U16BE
+        case .PCM_S8: self = .PCM_S8
+        case .PCM_U8: self = .PCM_U8
+        case .PCM_MULAW: self = .PCM_MULAW
+        case .PCM_ALAW: self = .PCM_ALAW
+        case .PCM_S32LE: self = .PCM_S32LE
+        case .PCM_S32BE: self = .PCM_S32BE
+        case .PCM_U32LE: self = .PCM_U32LE
+        case .PCM_U32BE: self = .PCM_U32BE
+        case .PCM_S24LE: self = .PCM_S24LE
+        case .PCM_S24BE: self = .PCM_S24BE
+        case .PCM_U24LE: self = .PCM_U24LE
+        case .PCM_U24BE: self = .PCM_U24BE
+        case .PCM_S24DAUD: self = .PCM_S24DAUD
+        case .PCM_ZORK: self = .PCM_ZORK
+        case .PCM_S16LE_PLANAR: self = .PCM_S16LE_PLANAR
+        case .PCM_DVD: self = .PCM_DVD
+        case .PCM_F32BE: self = .PCM_F32BE
+        case .PCM_F32LE: self = .PCM_F32LE
+        case .PCM_F64BE: self = .PCM_F64BE
+        case .PCM_F64LE: self = .PCM_F64LE
+        case .PCM_BLURAY: self = .PCM_BLURAY
+        case .PCM_LXF: self = .PCM_LXF
+        case .S302M: self = .S302M
+        case .PCM_S8_PLANAR: self = .PCM_S8_PLANAR
+        case .PCM_S24LE_PLANAR: self = .PCM_S24LE_PLANAR
+        case .PCM_S32LE_PLANAR: self = .PCM_S32LE_PLANAR
+        case .PCM_S16BE_PLANAR: self = .PCM_S16BE_PLANAR
+        case .PCM_S64LE: self = .PCM_S64LE
+        case .PCM_S64BE: self = .PCM_S64BE
+        case .PCM_F16LE: self = .PCM_F16LE
+        case .PCM_F24LE: self = .PCM_F24LE
+            // AMR
+        case .AMR_NB: self = .AMR_NB
+        case .AMR_WB: self = .AMR_WB
+            // Audio Codecs
+        case .MP2: self = .MP2
+        case .MP3: self = .MP3
+        case .AAC: self = .AAC
+        case .FLAC: self = .FLAC
+        case .APE: self = .APE
+        case .MP1: self = .MP1
+        default: self = .none // For unmatched cases, you might want to handle this differently
+        }
+    }
+    
+    var native: FFmpeg.AVCodecID {
+        switch self {
+        case .none: return .none
+        case .MPEG1VIDEO: return .MPEG1VIDEO
+        case .MPEG2VIDEO: return .MPEG2VIDEO
+        case .H261: return .H261
+        case .H263: return .H263
+        case .MPEG4: return .MPEG4
+        case .H264: return .H264
+        case .VP3: return .VP3
+        case .PNG: return .PNG
+        case .PGM: return .PGM
+        case .BMP: return .BMP
+        case .JPEG2000: return .JPEG2000
+        case .VP5: return .VP5
+        case .VP6: return .VP6
+        case .TIFF: return .TIFF
+        case .GIF: return .GIF
+        case .VP8: return .VP8
+        case .VP9: return .VP9
+        case .WEBP: return .WEBP
+        case .HEVC: return .HEVC
+        case .VP7: return .VP7
+        case .APNG: return .APNG
+        case .AV1: return .AV1
+        case .SVG: return .SVG
+            // PCM codecs
+        case .FIRST_AUDIO: return .FIRST_AUDIO
+        case .PCM_S16LE: return .PCM_S16LE
+        case .PCM_S16BE: return .PCM_S16BE
+        case .PCM_U16LE: return .PCM_U16LE
+        case .PCM_U16BE: return .PCM_U16BE
+        case .PCM_S8: return .PCM_S8
+        case .PCM_U8: return .PCM_U8
+        case .PCM_MULAW: return .PCM_MULAW
+        case .PCM_ALAW: return .PCM_ALAW
+        case .PCM_S32LE: return .PCM_S32LE
+        case .PCM_S32BE: return .PCM_S32BE
+        case .PCM_U32LE: return .PCM_U32LE
+        case .PCM_U32BE: return .PCM_U32BE
+        case .PCM_S24LE: return .PCM_S24LE
+        case .PCM_S24BE: return .PCM_S24BE
+        case .PCM_U24LE: return .PCM_U24LE
+        case .PCM_U24BE: return .PCM_U24BE
+        case .PCM_S24DAUD: return .PCM_S24DAUD
+        case .PCM_ZORK: return .PCM_ZORK
+        case .PCM_S16LE_PLANAR: return .PCM_S16LE_PLANAR
+        case .PCM_DVD: return .PCM_DVD
+        case .PCM_F32BE: return .PCM_F32BE
+        case .PCM_F32LE: return .PCM_F32LE
+        case .PCM_F64BE: return .PCM_F64BE
+        case .PCM_F64LE: return .PCM_F64LE
+        case .PCM_BLURAY: return .PCM_BLURAY
+        case .PCM_LXF: return .PCM_LXF
+        case .S302M: return .S302M
+        case .PCM_S8_PLANAR: return .PCM_S8_PLANAR
+        case .PCM_S24LE_PLANAR: return .PCM_S24LE_PLANAR
+        case .PCM_S32LE_PLANAR: return .PCM_S32LE_PLANAR
+        case .PCM_S16BE_PLANAR: return .PCM_S16BE_PLANAR
+        case .PCM_S64LE: return .PCM_S64LE
+        case .PCM_S64BE: return .PCM_S64BE
+        case .PCM_F16LE: return .PCM_F16LE
+        case .PCM_F24LE: return .PCM_F24LE
+            // AMR
+        case .AMR_NB: return .AMR_NB
+        case .AMR_WB: return .AMR_WB
+            // Audio Codecs
+        case .MP2: return .MP2
+        case .MP3: return .MP3
+        case .AAC: return .AAC
+        case .FLAC: return .FLAC
+        case .APE: return .APE
+        case .MP1: return .MP1
+        }
+    }
+    
+    /// The name of the codec.
+    public var name: String {
+        native.name
+    }
+    
+    /// The media type of the codec.
+    public var mediaType: AVMediaType {
+        native.mediaType
+    }
+}
+
 extension AVCodecID: CustomStringConvertible {
     public var description: String {
         name
@@ -125,7 +376,7 @@ public struct AVCodec {
     /// - Parameter codecId: id of the requested decoder
     /// - Returns: A decoder if one was found, `nil` otherwise.
     public static func findDecoderById(_ codecId: AVCodecID) -> AVCodec? {
-        guard let ptr = avcodec_find_decoder(codecId) else {
+        guard let ptr = avcodec_find_decoder(codecId.native) else {
             return nil
         }
         return AVCodec(native: ptr)
@@ -147,7 +398,7 @@ public struct AVCodec {
     /// - Parameter codecId: id of the requested encoder
     /// - Returns: An encoder if one was found, `nil` otherwise.
     public static func findEncoderById(_ codecId: AVCodecID) -> AVCodec? {
-        guard let ptr = avcodec_find_encoder(codecId) else {
+        guard let ptr = avcodec_find_encoder(codecId.native) else {
             return nil
         }
         return AVCodec(native: ptr)
@@ -168,7 +419,7 @@ public struct AVCodec {
     ///
     /// Unlike the member function `getProfileName(...)`, which searches a list of profiles supported by a specific decoder or encoder implementation, this class function searches the list of profiles from the `codecID`'s `AVCodecDescriptor`
     public static func profileName(codecID: AVCodecID, profile: Int32) -> String? {
-        String(cString: avcodec_profile_name(codecID, profile))
+        String(cString: avcodec_profile_name(codecID.native, profile))
     }
     
     init(native: UnsafePointer<CAVCodec>) {
@@ -192,7 +443,7 @@ public struct AVCodec {
     
     /// The codec's id.
     public var id: AVCodecID {
-        native.pointee.id
+        AVCodecID(native: native.pointee.id)
     }
     
     /// The codec's capabilities.
