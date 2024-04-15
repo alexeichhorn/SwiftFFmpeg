@@ -53,7 +53,8 @@ final public class AVFormatContext {
     }
     
     deinit {
-        avformat_close_input(&native)
+        // temporarily disabled
+        //avformat_close_input(&native)
     }
     
     /// Input or output URL.
