@@ -19,8 +19,9 @@ jobs:
     
     # install newest swift version
     - uses: swift-actions/setup-swift@v2
-    
+
     - name: Build
-      run: swift build -v
+      run: xcodebuild build -scheme YourSchemeName -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.0'
+    
     - name: Run tests
-      run: swift test -v
+      run: xcodebuild test -scheme YourSchemeName -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 15,OS=17.0'
