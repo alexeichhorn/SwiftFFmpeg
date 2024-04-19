@@ -13,10 +13,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    # Install ffmpeg using Homebrew
-    - name: Install FFmpeg
-      run: brew install ffmpeg
-    
     # install newest swift version
     - uses: swift-actions/setup-swift@v2
 
