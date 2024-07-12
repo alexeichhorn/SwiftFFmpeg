@@ -55,6 +55,7 @@ final public class AVFormatContext {
     deinit {
         // temporarily disabled
         //avformat_close_input(&native)
+        avformat_free_context(native)
     }
     
     /// Input or output URL.
@@ -65,7 +66,14 @@ final public class AVFormatContext {
     ///   Set to an empty string if it was `nil` in `writeHeader(options:)`.
     public var url: String? {
         get { String(cString: native.pointee.url) }
-        set { native.pointee.url = av_strdup(newValue) }
+        set {
+            if let previousURL = native.pointee.url {
+                // free previous string
+//                av_freep(previousURL)
+                previousURL.deallocate()
+            }
+            native.pointee.url = av_strdup(newValue)
+        }
     }
     
     /// I/O context.
