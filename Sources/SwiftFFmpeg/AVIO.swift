@@ -181,6 +181,7 @@ public final class AVIOContext {
         }
         
         let byteArray = Array(UnsafeBufferPointer(start: buffer, count: Int(length)))
+        buffer?.deallocate()
         return byteArray
     }
     
