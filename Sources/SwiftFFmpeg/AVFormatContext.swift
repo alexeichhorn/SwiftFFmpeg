@@ -55,6 +55,7 @@ final public class AVFormatContext {
     deinit {
         // temporarily disabled
         //avformat_close_input(&native)
+        _ = try? ioContext?.closeDynamicBuffer() // make sure dynamic buffer is closed (could lead to big memory leak otherwise)
         avformat_free_context(native)
     }
     
