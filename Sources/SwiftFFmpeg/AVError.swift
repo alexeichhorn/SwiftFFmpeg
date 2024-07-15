@@ -37,42 +37,42 @@ extension AVError {
     public static let noSystem = AVError(code: swift_AVERROR(ENOSYS))
 
     /// Bitstream filter not found
-    public static let bitstreamFilterNotFound = AVError(code: numericCast(0xb9acbd08))
+    public static let bitstreamFilterNotFound = AVError(code: Int32(bitPattern: 0xb9acbd08))
     /// Internal bug, also see `bug2`
-    public static let bug = AVError(code: numericCast(0xdeb8aabe))
+    public static let bug = AVError(code: Int32(bitPattern: 0xdeb8aabe))
     /// Buffer too small
-    public static let bufferTooSmall = AVError(code: numericCast(0xacb9aabe))
+    public static let bufferTooSmall = AVError(code: Int32(bitPattern: 0xacb9aabe))
     /// Decoder not found
-    public static let decoderNotFound = AVError(code: numericCast(0xbcbabb08))
+    public static let decoderNotFound = AVError(code: Int32(bitPattern: 0xbcbabb08))
     /// Demuxer not found
-    public static let demuxerNotFound = AVError(code: numericCast(0xb2babb08))
+    public static let demuxerNotFound = AVError(code: Int32(bitPattern: 0xb2babb08))
     /// Encoder not found
-    public static let encoderNotFound = AVError(code: numericCast(0xbcb1ba08))
+    public static let encoderNotFound = AVError(code: Int32(bitPattern: 0xbcb1ba08))
     /// End of file
-    public static let eof = AVError(code: numericCast(0xdfb9b0bb))
+    public static let eof = AVError(code: Int32(bitPattern: 0xdfb9b0bb))
     /// Immediate exit was requested; the called function should not be restarted
-    public static let exit = AVError(code: numericCast(0xabb6a7bb))
+    public static let exit = AVError(code: Int32(bitPattern: 0xabb6a7bb))
     /// Generic error in an external library
-    public static let external = AVError(code: numericCast(0xdfaba7bb))
+    public static let external = AVError(code: Int32(bitPattern: 0xdfaba7bb))
     /// Filter not found
-    public static let filterNotFound = AVError(code: numericCast(0xb3b6b908))
+    public static let filterNotFound = AVError(code: Int32(bitPattern: 0xb3b6b908))
     /// Invalid data found when processing input
-    public static let invalidData = AVError(code: numericCast(0xbebbb1b7))
+    public static let invalidData = AVError(code: Int32(bitPattern: 0xbebbb1b7))
     /// Muxer not found
-    public static let muxerNotFound = AVError(code: numericCast(0xa7aab208))
+    public static let muxerNotFound = AVError(code: Int32(bitPattern: 0xa7aab208))
     /// Option not found
-    public static let optionNotFound = AVError(code: numericCast(0xabafb008))
+    public static let optionNotFound = AVError(code: Int32(bitPattern: 0xabafb008))
     /// Not yet implemented in FFmpeg, patches welcome
-    public static let patchWelcome = AVError(code: numericCast(0xbaa8beb0))
+    public static let patchWelcome = AVError(code: Int32(bitPattern: 0xbaa8beb0))
     /// Protocol not found
-    public static let protocolNotFound = AVError(code: numericCast(0xb0adaf08))
+    public static let protocolNotFound = AVError(code: Int32(bitPattern: 0xb0adaf08))
     /// Stream not found
-    public static let streamNotFound = AVError(code: numericCast(0xadabac08))
+    public static let streamNotFound = AVError(code: Int32(bitPattern: 0xadabac08))
     /// This is semantically identical to `bug`. It has been introduced in Libav after our `bug` and
     /// with a modified value.
-    public static let bug2 = AVError(code: numericCast(0xdfb8aabe))
+    public static let bug2 = AVError(code: Int32(bitPattern: 0xdfb8aabe))
     /// Unknown error, typically from an external library
-    public static let unknown = AVError(code: numericCast(0xb1b4b1ab))
+    public static let unknown = AVError(code: Int32(bitPattern: 0xb1b4b1ab))
     ///  Requested feature is flagged experimental. Set strict_std_compliance if you really want to use it.
     public static let experimental = AVError(code: AVERROR_EXPERIMENTAL)
     /// Input changed between calls. Reconfiguration is required. (can be OR-ed with `outputChanged`)
@@ -81,12 +81,12 @@ extension AVError {
     public static let outputChanged = AVError(code: AVERROR_OUTPUT_CHANGED)
 
     /* HTTP & RTSP errors */
-    public static let httpBadRequest = AVError(code: numericCast(0xcfcfcb08))
-    public static let httpUnauthorized = AVError(code: numericCast(0xcecfcb08))
-    public static let httpForbidden = AVError(code: numericCast(0xcccfcb08))
-    public static let httpNotFound = AVError(code: numericCast(0xcbcfcb08))
-    public static let httpOther4xx = AVError(code: numericCast(0xa7a7cb08))
-    public static let httpServerError = AVError(code: numericCast(0xa7a7ca08))
+    public static let httpBadRequest = AVError(code: Int32(bitPattern: 0xcfcfcb08))
+    public static let httpUnauthorized = AVError(code: Int32(bitPattern: 0xcecfcb08))
+    public static let httpForbidden = AVError(code: Int32(bitPattern: 0xcccfcb08))
+    public static let httpNotFound = AVError(code: Int32(bitPattern: 0xcbcfcb08))
+    public static let httpOther4xx = AVError(code: Int32(bitPattern: 0xa7a7cb08))
+    public static let httpServerError = AVError(code: Int32(bitPattern: 0xa7a7ca08))
 }
 
 extension String {
