@@ -3,6 +3,35 @@
 
 import PackageDescription
 
+let linkerSettings: [LinkerSetting]
+let dependencies: [Package.Dependency]
+let targetDependencies: [Target.Dependency]
+#if os(Linux)
+linkerSettings = [
+    .linkedLibrary("avformat"),
+    .linkedLibrary("avcodec"),
+    .linkedLibrary("avutil")
+]
+
+dependencies = [
+    .package(path: "../FFmpegKit-Linux")
+]
+
+targetDependencies = [
+    .product(name: "FFmpeg", package: "ffmpegkit-linux")
+]
+#else
+linkerSettings = []
+
+dependencies = [
+    .package(url: "https://github.com/tylerjonesio/ffmpeg-kit-spm/", from: "5.1.0")
+]
+
+targetDependencies = [
+    .product(name: "FFmpeg", package: "ffmpeg-kit-spm")
+]
+#endif
+
 let package = Package(
     name: "SwiftFFmpeg",
     platforms: [
@@ -17,20 +46,17 @@ let package = Package(
             name: "SwiftFFmpeg",
             targets: ["SwiftFFmpeg"]),
     ],
-    dependencies: [
-        .package(url: "https://github.com/tylerjonesio/ffmpeg-kit-spm/", from: "5.1.0")
-    ],
+    dependencies: dependencies,
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "SwiftFFmpeg",
-            dependencies: [
-                .product(name: "FFmpeg", package: "ffmpeg-kit-spm")
-            ],
+            dependencies: targetDependencies,
             swiftSettings: [
               .enableExperimentalFeature("StrictConcurrency")
-            ]
+            ],
+            linkerSettings: linkerSettings
         ),
         .testTarget(
             name: "SwiftFFmpegTests",
