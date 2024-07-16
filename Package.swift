@@ -14,7 +14,7 @@ linkerSettings = [
 ]
 
 dependencies = [
-    .package(path: "../FFmpegKit-Linux")
+    .package(url: "https://github.com/alexeichhorn/FFmpegKit-Linux/", branch: "main")
 ]
 
 targetDependencies = [
