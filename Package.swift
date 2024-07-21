@@ -6,7 +6,7 @@ import PackageDescription
 let linkerSettings: [LinkerSetting]
 let dependencies: [Package.Dependency]
 let targetDependencies: [Target.Dependency]
-#if os(Linux)
+#if os(Linux) || os(macOS)
 linkerSettings = [
     .linkedLibrary("avformat"),
     .linkedLibrary("avcodec"),
