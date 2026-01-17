@@ -95,7 +95,13 @@ extension FFmpeg.AVCodecID {
     public static let FLAC = AV_CODEC_ID_FLAC
     public static let APE = AV_CODEC_ID_APE
     public static let MP1 = AV_CODEC_ID_MP1
-    
+    public static let AC3 = AV_CODEC_ID_AC3
+    public static let EAC3 = AV_CODEC_ID_EAC3
+    public static let DTS = AV_CODEC_ID_DTS
+    public static let TRUEHD = AV_CODEC_ID_TRUEHD
+    public static let VORBIS = AV_CODEC_ID_VORBIS
+    public static let OPUS = AV_CODEC_ID_OPUS
+
     /// The name of the codec.
     public var name: String {
         String(cString: avcodec_get_name(self))
@@ -193,7 +199,13 @@ public enum AVCodecID {
     case FLAC
     case APE
     case MP1
-    
+    case AC3
+    case EAC3
+    case DTS
+    case TRUEHD
+    case VORBIS
+    case OPUS
+
     public init(native: FFmpeg.AVCodecID) {
         switch native {
         case .none: self = .none
@@ -267,6 +279,12 @@ public enum AVCodecID {
         case .FLAC: self = .FLAC
         case .APE: self = .APE
         case .MP1: self = .MP1
+        case .AC3: self = .AC3
+        case .EAC3: self = .EAC3
+        case .DTS: self = .DTS
+        case .TRUEHD: self = .TRUEHD
+        case .VORBIS: self = .VORBIS
+        case .OPUS: self = .OPUS
         default: self = .none // For unmatched cases, you might want to handle this differently
         }
     }
@@ -344,6 +362,12 @@ public enum AVCodecID {
         case .FLAC: return .FLAC
         case .APE: return .APE
         case .MP1: return .MP1
+        case .AC3: return .AC3
+        case .EAC3: return .EAC3
+        case .DTS: return .DTS
+        case .TRUEHD: return .TRUEHD
+        case .VORBIS: return .VORBIS
+        case .OPUS: return .OPUS
         }
     }
     
